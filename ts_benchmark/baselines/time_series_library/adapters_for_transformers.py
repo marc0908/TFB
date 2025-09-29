@@ -51,6 +51,8 @@ MODEL_HYPER_PARAMS = {
     "use_norm": True,
     "parallel_strategy": "DP",
     "task_name": "short_term_forecast",
+    # TimeXer specific parameters
+    "features": "M",  # M for multivariate, S for univariate
 }
 
 
@@ -131,3 +133,10 @@ def transformer_adapter(model_info: Type[object]) -> object:
             "norm": "norm",
         },
     )
+
+
+# Import TimeXer model
+from .models.TimeXer import Model as TimeXerModel
+
+# Create TimeXer adapter
+TimeXer = transformer_adapter(TimeXerModel)
